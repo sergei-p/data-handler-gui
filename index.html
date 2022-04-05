@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="./renderer.js"></script>
+    <!-- <script>
+      const {ipcRenderer} = require('electron')
+      function submitData() {
+        ipcRenderer.send("msg", "hello from render process")
+        alert("working")
+      }
+    </script> -->
+    
+    <title>Data Handler</title>
+  </head>
+  <body>
+    <header class="header">
+      <h2 class="header-title">Data Handler</h2>
+    </header>
+    <main>
+      <form id="urlSumibtForm" class="url-form">
+        <div class="urlForm-container">
+          <div>
+            <label>Concentration Path</label>
+          </div>
+          <input id="concentrationPath" class="input" type="text">
+          <div>
+            <label>Backpressure Path</label>
+          </div>
+          <input id="backpressurePath" class="input" type="text">
+          <div>
+            <label>Spray Film Budgeting</label>
+          </div>
+          <input id="sprayFilmBudgeting" class="input" type="text">
+          <div>
+            <label>CFD Simulation Results Path</label>
+          </div>
+          <input id="cfdSimulationResults" class="input" type="text">
+          <div>
+            <button id="submitButton" onclick="submitData()" class="btn" type="submit">Submit</button>
+          </div>
+      </div>
+      </form>
+    </main>
+    <footer class="footer">
+    Node.js <span id="node-version"></span>, Chromium <span id="chrome-version"></span>, Electron <span id="electron-version"></span> 
+    </footer>
+    <!-- <script src="./renderer.js"></script> -->
+  </body>
+</html>

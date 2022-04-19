@@ -1,4 +1,6 @@
+
 const { app, BrowserWindow, ipcMain } = require('electron')
+import {PythonShell} from 'python-shell';
 const path = require('path')
 // const ipcRenderer =  require('electron').ipcRenderer
 
@@ -25,7 +27,26 @@ const createWindow = () => {
 
 ipcMain.on("msg", (event, data) => {
   console.log(data)
+  executePythonDataHandler(data)
 })
+
+const executePythonDataHandler = (filePathsObj) => {
+  let options = {
+    mode: 'text',
+    pythoOPtions: ['-u'], // get print results in real-time
+    scriptPath: '../backend/data-handler/',
+    args: [filePathsObj.concentrationPath, filePathsObj.backpressurePath, filePathsObj.sprayFilmBudgeting, sprayFilmBudgeting.cfdSimulationResult]
+  }
+
+  // Later add functionality for displaying error and success messages in the User Interface
+  PythonShell.run('index.py', options, function (err, results) {
+    if (err) throw err;
+    // results is an array consisting of messages collected during execution
+    console.log('results: %j', results);
+  });
+  
+  
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -46,5 +67,3 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
-
-
